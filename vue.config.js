@@ -1,18 +1,24 @@
 // const path = require('path')
-
+const AutoImport = require('unplugin-auto-import/webpack')
+const Components = require('unplugin-vue-components/webpack')
+const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
 module.exports = {
   //1.配置方式一：根据CLI提供的选项来配置：
   // outputDir: './build',
   // publicPath: './'
   //2.配置方式二：和webpack属性完全一致，最后会进行合并
   //1.对象 直接会被合并；
-  // configureWebpack: {
-  //   resolve: {
-  //     alias: {
-  //       components: '@/components'
-  //     }
-  //   }
-  // }
+  //按需引入element-plus样式 npm install -D unplugin-vue-components unplugin-auto-import
+  configureWebpack: {
+    plugins: [
+      AutoImport({
+        resolvers: [ElementPlusResolver()]
+      }),
+      Components({
+        resolvers: [ElementPlusResolver()]
+      })
+    ]
+  }
   //2:函数 会接收一个config，可以通过config来修改配置；
   // configureWebpack: (config) => {
   //   config.resolve.alias = {

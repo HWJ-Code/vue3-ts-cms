@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "element-plus": "^1.2.0-beta.6",
     "vue": "^3.0.0",
     "vue-router": "^4.0.12",
     "vuex": "^4.0.2"
@@ -37,7 +38,9 @@
     "prettier": "^2.5.1",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
-    "typescript": "~4.1.5"
+    "typescript": "~4.1.5",
+    "unplugin-auto-import": "^0.5.4",
+    "unplugin-vue-components": "^0.17.9"
   },
   "config": {
     "commitizen": {
