@@ -46,5 +46,17 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  }
+  },
+  "description": "```\r npm install\r ```",
+  "main": ".eslintrc.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HWJ-Code/vue3-ts-cms.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HWJ-Code/vue3-ts-cms/issues"
+  },
+  "homepage": "https://github.com/HWJ-Code/vue3-ts-cms#readme"
 }

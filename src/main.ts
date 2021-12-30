@@ -3,7 +3,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import { globalRegister } from './global'
+// import { globalRegister } from './global'
 //全局引入element-plus
 // import ElementPlus from 'element-plus'
 // import 'element-plus/theme-chalk/index.css'
@@ -14,8 +14,8 @@ import { globalRegister } from './global'
 // app.component(ElButton.name, ElButton)
 
 const app = createApp(App)
-//注册element-plus/其他
-app.use(globalRegister)
+//注册其他
+// app.use(globalRegister)
 app.use(router)
 app.use(store)
 // app.use(ElementPlus)
