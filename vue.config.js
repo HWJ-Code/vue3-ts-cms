@@ -5,7 +5,7 @@ const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
 module.exports = {
   //1.配置方式一：根据CLI提供的选项来配置：
   // outputDir: './build',
-  // publicPath: './'
+  publicPath: './',
   //2.配置方式二：和webpack属性完全一致，最后会进行合并
   //1.对象 直接会被合并；
   //按需引入element-plus样式 npm install -D unplugin-vue-components unplugin-auto-import
