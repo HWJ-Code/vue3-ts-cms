@@ -3,6 +3,8 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+// import './service/axios_demo'
+
 // import { globalRegister } from './global'
 //全局引入element-plus
 // import ElementPlus from 'element-plus'
@@ -14,6 +16,7 @@ import store from './store'
 // app.component(ElButton.name, ElButton)
 
 // import { BASE_URL } from './service/request/config'
+import hhRequest from './service'
 const app = createApp(App)
 app.use(router)
 app.use(store)
@@ -27,3 +30,40 @@ app.mount('#app')
 //根据不同生产环境读取不同配置文件
 console.log(process.env.VUE_APP_BASE_URL)
 console.log(process.env.VUE_APP_BASE_NAME)
+
+//单独请求的配置
+hhRequest.request({
+  url: '/home/multidata',
+  method: 'GET',
+  headers: {},
+  // showLoading: false,
+  interceptors: {
+    requestInterceptor: (config) => {
+      console.log('单独请求成功拦截:', config)
+      config.headers = { token: 'aaaa' }
+      return config
+    },
+    responseInterceptor: (res) => {
+      console.log('单独请求响应成功拦截:', res)
+      return res
+    }
+  }
+})
+
+//定义响应数据类型
+interface responseDataType {
+  data: any
+  returnCode: string
+  success: boolean
+}
+hhRequest
+  .get<responseDataType>({
+    url: '/home/multidata',
+    showLoading: false
+  })
+  .then((res) => {
+    console.log('==============数据响应成功===============')
+    console.log(res.data)
+    console.log(res.returnCode)
+    console.log(res.success)
+  })

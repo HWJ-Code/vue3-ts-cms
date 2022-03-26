@@ -1,7 +1,9 @@
 // const path = require('path')
+const ElementPlus = require('unplugin-element-plus/webpack')
 const AutoImport = require('unplugin-auto-import/webpack')
 const Components = require('unplugin-vue-components/webpack')
 const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
+
 module.exports = {
   //1.配置方式一：根据CLI提供的选项来配置：
   // outputDir: './build',
@@ -11,8 +13,15 @@ module.exports = {
   //按需引入element-plus样式 npm install -D unplugin-vue-components unplugin-auto-import
   configureWebpack: {
     plugins: [
+      ElementPlus(),
+
       AutoImport({
-        resolvers: [ElementPlusResolver()]
+        resolvers: [
+          // ElementPlusResolver()
+
+          //解决v-loading报错找不到样式的问题 不去引入
+          ElementPlusResolver({ importStyle: false })
+        ]
       }),
       Components({
         resolvers: [ElementPlusResolver()]
