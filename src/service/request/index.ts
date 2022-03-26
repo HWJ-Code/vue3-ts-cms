@@ -1,7 +1,7 @@
 //axios封装
 import axios from 'axios'
-import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
-
+import type { AxiosInstance } from 'axios'
+import type { HhRequestInterceptor, HhRequestConfig } from './type'
 // 以服务的方式调用ElLoading，样式没有自动导入 需要手动去导入
 // 自动导入解决方法：可以用unplugin-element-plus插件 vue.config.js配置ElementPlus()
 import { ElLoading } from 'element-plus'
@@ -10,18 +10,6 @@ import { ElLoading } from 'element-plus'
 // 导入ElLoading.service返回的实例类型
 import { LoadingInstance } from 'element-plus/es/components/loading/src/loading'
 
-//拦截器类型 - 响应成功返回值T
-interface HhRequestInterceptor<T = AxiosResponse> {
-  requestInterceptor?: (config: AxiosRequestConfig) => AxiosRequestConfig
-  requestInterceptorCatch?: (err: any) => any
-  responseInterceptor?: (res: T) => T
-  responseInterceptorCatch?: (err: any) => any
-}
-//自定义请求config 可以自定义添加参数
-interface HhRequestConfig<T = AxiosResponse> extends AxiosRequestConfig {
-  interceptors?: HhRequestInterceptor<T>
-  showLoading?: boolean
-}
 const DEFAULT_LOADING = true //如果不传showloading的值，默认showLoading=true
 class HhRequest {
   instance: AxiosInstance //axios实例,每次都创建一个新的实例
