@@ -3,9 +3,12 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import 'normalize.css'
+import 'assets/css/index.scss'
 // import './service/axios_demo'
+//注册element-icon/其他
+import { globalRegister } from './global'
 
-// import { globalRegister } from './global'
 //全局引入element-plus
 // import ElementPlus from 'element-plus'
 // import 'element-plus/theme-chalk/index.css'
@@ -16,18 +19,18 @@ import store from './store'
 // app.component(ElButton.name, ElButton)
 
 // import { BASE_URL } from './service/request/config'
-import hhRequest from './service'
+// import hhRequest from './service'
 const app = createApp(App)
 app.use(router)
 app.use(store)
 
 //注册其他
-// app.use(globalRegister)
+app.use(globalRegister)
 // app.use(ElementPlus) -- 全局
-
 app.mount('#app')
 
-//根据不同生产环境读取不同配置文件
+/*
+ //根据不同生产环境读取不同配置文件
 console.log(process.env.VUE_APP_BASE_URL)
 console.log(process.env.VUE_APP_BASE_NAME)
 
@@ -67,3 +70,5 @@ hhRequest
     console.log(res.returnCode)
     console.log(res.success)
   })
+
+*/

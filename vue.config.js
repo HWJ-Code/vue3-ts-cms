@@ -26,7 +26,14 @@ module.exports = {
       Components({
         resolvers: [ElementPlusResolver()]
       })
-    ]
+    ],
+    //配置路径别名
+    resolve: {
+      alias: {
+        assets: '@/assets',
+        components: '@/components'
+      }
+    }
   }
   //2:函数 会接收一个config，可以通过config来修改配置；
   // configureWebpack: (config) => {
