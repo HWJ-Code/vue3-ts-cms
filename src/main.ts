@@ -8,7 +8,7 @@ import 'assets/css/index.scss'
 // import './service/axios_demo'
 //注册element-icon/其他
 import { globalRegister } from './global'
-
+import { setupStore } from './store'
 //全局引入element-plus
 // import ElementPlus from 'element-plus'
 // import 'element-plus/theme-chalk/index.css'
@@ -27,6 +27,9 @@ app.use(store)
 //注册其他
 app.use(globalRegister)
 // app.use(ElementPlus) -- 全局
+
+//每次运行(页面刷新等)重新将localstorage中的数据保存到vuex中
+setupStore()
 app.mount('#app')
 
 /*

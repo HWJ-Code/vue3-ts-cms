@@ -4,7 +4,7 @@ import type { AxiosInstance } from 'axios'
 import type { HhRequestInterceptor, HhRequestConfig } from './type'
 // 以服务的方式调用ElLoading，样式没有自动导入 需要手动去导入
 // 自动导入解决方法：可以用unplugin-element-plus插件 vue.config.js配置ElementPlus()
-import { ElLoading } from 'element-plus'
+import { ElLoading, ElMessage } from 'element-plus'
 // import 'element-plus/theme-chalk/el-loading.css' //手动导入样式
 
 // 导入ElLoading.service返回的实例类型
@@ -38,7 +38,7 @@ class HhRequest {
     //添加所有实例的请求拦截（需要返回） 比如添加请求loading
     this.instance.interceptors.request.use(
       (config) => {
-        console.log('所有实例的请求拦截成功', config)
+        // console.log('所有实例的请求拦截成功', config)
         // console.log('所有实例的请求添加loading', this.showLoading)
         //如果showLoading=true 添加loading
         if (this.showLoading) {
@@ -58,11 +58,9 @@ class HhRequest {
     //添加所有实例的响应拦截（需要返回）
     this.instance.interceptors.response.use(
       (res) => {
-        console.log('所有实例的响应拦截成功', res)
+        // console.log('所有实例的响应拦截成功', res)
         //关闭loading(settimeout查看效果)
-        setTimeout(() => {
-          this.loadingInstance?.close()
-        }, 5000)
+        this.loadingInstance?.close()
 
         const data = res.data
         if (data.returnCode === '-1001') {
@@ -73,13 +71,20 @@ class HhRequest {
         }
       },
       (err) => {
-        console.log('所有实例的响应拦截失败', err)
+        console.log('所有实例的响应拦截失败', err.response)
         //关闭loading
         this.loadingInstance?.close()
 
         //判断不同的HttpErrorCode显示不同的错误信息 如：
         if (err.response.status === 404) {
           console.log('404的错误~')
+        } else if (err.response.status == 400) {
+          if (err.response.data) {
+            ElMessage({
+              message: err.response.data,
+              type: 'error'
+            })
+          }
         }
         return err
       }
@@ -89,6 +94,7 @@ class HhRequest {
     return new Promise((resolve, reject) => {
       //单个请求对请求config的处理
       // console.log('单个请求添加loading', this.showLoading)
+      config.headers = config.headers ? config.headers : {}
       if (config.interceptors?.requestInterceptor) {
         config = config.interceptors.requestInterceptor(config)
       }
@@ -112,6 +118,7 @@ class HhRequest {
         .catch((err) => {
           // 将showLoading设置true, 这样不会影响下一个请求
           this.showLoading = DEFAULT_LOADING
+          console.log('请求失败', err)
           reject(err)
           return err
         })

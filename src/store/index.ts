@@ -1,11 +1,25 @@
 import { createStore } from 'vuex'
-const store = createStore({
+import { IRootState } from './types'
+import login from './login/login'
+
+//createStore需要设置state的类型 可以自定义
+const store = createStore<IRootState>({
   state: () => {
-    return {}
+    return {
+      name: 'hh',
+      height: 165
+    }
   },
-  mutations: {},
   actions: {},
-  getters: {}
+  getters: {},
+  mutations: {},
+  modules: {
+    login
+  }
 })
+
+export function setupStore() {
+  store.dispatch('login/loadLocalLogin')
+}
 
 export default store

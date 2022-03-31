@@ -51,7 +51,6 @@ export default defineComponent({
 
     //登录逻辑 -- 放到各自的组件中执行
     const toLogin = () => {
-      console.log(currentTab.value)
       if (currentTab.value == 'account') {
         accountRef.value?.loginAction(isKeepPassword.value)
       } else {

@@ -20,5 +20,6 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/no-explicit-any': 'off', //可以指定类型为any
+    '@typescript-eslint/explicit-module-boundary-types': 'off'
   }
 }
