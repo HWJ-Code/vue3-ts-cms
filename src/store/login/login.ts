@@ -37,25 +37,24 @@ const loginModule: Module<ILoginState, IRootState> = {
     async accountLoginAction({ commit }, payload: IAccountData) {
       //1.请求登录接口
       const loginResult = await accounLoginRequst(payload)
-      if (loginResult.data) {
-        const { id, token } = loginResult.data
-        //提交mutation修改state
-        commit('changeToken', token)
-        localCache.setCache('token', token)
+      if (!loginResult.data) return
+      const { id, token } = loginResult.data
+      //提交mutation修改state
+      commit('changeToken', token)
+      localCache.setCache('token', token)
 
-        //2.获取用户信息
-        const userInfoResult = await loginUserInfoRequest(id)
-        commit('changeUserInfo', userInfoResult.data)
-        localCache.setCache('userInfo', userInfoResult.data)
+      //2.获取用户信息
+      const userInfoResult = await loginUserInfoRequest(id)
+      commit('changeUserInfo', userInfoResult.data)
+      localCache.setCache('userInfo', userInfoResult.data)
 
-        //3.获取用户菜单
-        const userMenusResult = await loginUserMenusRequest(id)
-        commit('changeUserMenus', userMenusResult.data)
-        localCache.setCache('userMenus', userMenusResult.data)
+      //3.获取用户菜单
+      const userMenusResult = await loginUserMenusRequest(id)
+      commit('changeUserMenus', userMenusResult.data)
+      localCache.setCache('userMenus', userMenusResult.data)
 
-        //4.跳到首页
-        router.push('/main')
-      }
+      //4.跳到首页
+      router.push('/main')
     },
     loadLocalLogin({ commit }) {
       //重新将localstorage中的数据放进vuex中

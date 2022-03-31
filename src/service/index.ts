@@ -20,7 +20,7 @@ const hhRequest = new HhRequest({
       return config
     },
     responseInterceptor: (res) => {
-      console.log('响应成功拦截:', res)
+      // console.log('响应成功拦截:', res)
       return res
     }
   }
