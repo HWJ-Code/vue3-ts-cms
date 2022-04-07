@@ -1,6 +1,6 @@
 <template>
-  <div class="app">
-    <router-view></router-view>
+  <div class="dashboard">
+    <h2>dashboard</h2>
   </div>
 </template>
 
@@ -8,12 +8,11 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'App'
+  name: 'dashboard',
+  setup() {
+    return {}
+  }
 })
 </script>
 
-<style lang="scss">
-.app {
-  height: 100%;
-}
-</style>
+<style scoped lang="scss"></style>

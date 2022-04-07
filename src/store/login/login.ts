@@ -7,10 +7,12 @@ import {
 } from '@/service/login/login'
 import localCache from '@/utils/cache'
 
+import router from '@/router'
+import { mapMenusToRoutes } from '@/utils/map-menus'
+
 import { IRootState } from '../types'
 import { ILoginState } from './types'
 import { IAccountData } from '@/service/login/types'
-import router from '@/router'
 
 //Module需要两个类型<S,R>：S--当前模块中state的类型，R--根state的类型
 const loginModule: Module<ILoginState, IRootState> = {
@@ -30,6 +32,13 @@ const loginModule: Module<ILoginState, IRootState> = {
     },
     changeUserMenus(state, userMenus) {
       state.userMenus = userMenus
+
+      //注册动态路由(main->children)
+      // console.log('注册动态路由~')
+      const routes = mapMenusToRoutes(userMenus)
+      routes.forEach((route) => {
+        router.addRoute('main', route)
+      })
     }
   },
   actions: {

@@ -21,7 +21,6 @@ import { setupStore } from './store'
 // import { BASE_URL } from './service/request/config'
 // import hhRequest from './service'
 const app = createApp(App)
-app.use(router)
 app.use(store)
 
 //注册其他
@@ -30,6 +29,9 @@ app.use(globalRegister)
 
 //每次运行(页面刷新等)重新将localstorage中的数据保存到vuex中
 setupStore()
+
+//刷新not-found问题：先处理好store再添加路由
+app.use(router)
 app.mount('#app')
 
 /*
