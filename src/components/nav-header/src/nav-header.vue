@@ -2,7 +2,7 @@
   <div class="nav-header">
     <div class="nav-left">
       <el-icon class="fold-icon" @click="changeFold">
-        <component :is="isFold ? 'fold' : 'expand'"></component>
+        <component :is="isFold ? 'expand' : 'fold'"></component>
       </el-icon>
     </div>
     <div class="nav-right"></div>
