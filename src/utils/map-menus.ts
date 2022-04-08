@@ -1,3 +1,4 @@
+import { IBreadcrumbsType } from '@/base-ui/breadcrumb'
 import { RouteRecordRaw } from 'vue-router'
 
 //第一次进页面显示第一个菜单
@@ -54,16 +55,42 @@ export function mapMenusToRoutes(userMenus: any[]): RouteRecordRaw[] {
   return routes
 }
 
-//根据当前路由获取对应menu的信息
-export function getMenuByRoute(userMenus: any[], currentPath: string): any {
+export { firstMenu }
+
+//根据当前路由获取对应menu的信息 [{name: , path: }]（父级一起返回）
+export function pathMapBreadcrumbs(userMenus: any[], currentPath: string) {
+  const breadcrumbs: IBreadcrumbsType[] = []
+  getMenuByRoute(userMenus, currentPath, breadcrumbs)
+  return breadcrumbs
+}
+
+export function getMenuByRoute(
+  userMenus: any[],
+  currentPath: string,
+  breadcrumbs?: IBreadcrumbsType[] //面包屑数据
+): any {
   for (const menu of userMenus) {
     if (menu.type == 1) {
       const findMenu = getMenuByRoute(menu.children ?? [], currentPath)
-      if (findMenu) return findMenu
+      if (findMenu) {
+        breadcrumbs?.push({ name: menu.name })
+        breadcrumbs?.push({ name: findMenu.name })
+        return findMenu
+      }
     } else if (menu.type === 2 && menu.url === currentPath) {
       return menu
     }
   }
 }
 
-export { firstMenu }
+//只获取当前子菜单路由
+// export function getMenuByRoute(userMenus: any[], currentPath: string): any {
+//   for (const menu of userMenus) {
+//     if (menu.type == 1) {
+//       const findMenu = getMenuByRoute(menu.children ?? [], currentPath)
+//       if (findMenu) return findMenu
+//     } else if (menu.type === 2 && menu.url === currentPath) {
+//       return menu
+//     }
+//   }
+// }

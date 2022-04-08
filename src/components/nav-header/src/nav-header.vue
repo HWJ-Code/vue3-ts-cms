@@ -1,18 +1,27 @@
 <template>
   <div class="nav-header">
-    <div class="nav-left">
-      <el-icon class="fold-icon" @click="changeFold">
-        <component :is="isFold ? 'expand' : 'fold'"></component>
-      </el-icon>
+    <el-icon class="fold-icon" @click="changeFold">
+      <component :is="isFold ? 'expand' : 'fold'"></component>
+    </el-icon>
+    <div class="nav-content">
+      <breadcrumb :breadcrumbs="currentRouteMenuPath"></breadcrumb>
+      <user-info></user-info>
     </div>
-    <div class="nav-right"></div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
+import { useRoute } from 'vue-router'
+import { useStore } from 'vuex'
+
+import { pathMapBreadcrumbs } from '@/utils/map-menus'
+
+import breadcrumb from '@/base-ui/breadcrumb/src/breadcrumb.vue'
+import userInfo from './user-info.vue'
 
 export default defineComponent({
+  components: { breadcrumb, userInfo },
   emits: ['foldChange'],
   setup(props, { emit }) {
     const isFold = ref(false)
@@ -20,9 +29,18 @@ export default defineComponent({
       isFold.value = !isFold.value
       emit('foldChange', isFold.value)
     }
+
+    //当前面包屑数据 [{name: , path: }]
+    const currentRouteMenuPath = computed(() => {
+      const store = useStore()
+      const route = useRoute()
+      return pathMapBreadcrumbs(store.state.login.userMenus, route.path)
+    })
+
     return {
       isFold,
-      changeFold
+      changeFold,
+      currentRouteMenuPath
     }
   }
 })
@@ -32,24 +50,23 @@ export default defineComponent({
 .flex-row {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 .nav-header {
   @extend .flex-row;
-  justify-content: space-between;
   height: 100%;
   line-height: 100%;
   width: 100%;
 
-  .nav-left {
-    @extend .flex-row;
-    .fold-icon {
-      font-size: 26px;
-      cursor: pointer;
-      margin-right: 10px;
-    }
+  .fold-icon {
+    font-size: 26px;
+    cursor: pointer;
+    margin-right: 10px;
   }
 
-  .nav-right {
+  .nav-content {
+    @extend .flex-row;
+    flex: 1;
   }
 }
 </style>

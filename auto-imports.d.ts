@@ -2,6 +2,8 @@
 // We suggest you to commit this file into source control
 declare global {
   const ElAside: typeof import('element-plus/es')['ElAside']
+  const ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
+  const ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
   const ElButton: typeof import('element-plus/es')['ElButton']
   const ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
   const ElContainer: typeof import('element-plus/es')['ElContainer']

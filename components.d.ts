@@ -5,6 +5,8 @@
 declare module 'vue' {
   export interface GlobalComponents {
     ElAside: typeof import('element-plus/es')['ElAside']
+    ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
+    ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
     ElContainer: typeof import('element-plus/es')['ElContainer']
@@ -22,6 +24,7 @@ declare module 'vue' {
     ElTabs: typeof import('element-plus/es')['ElTabs']
     NavHeader: typeof import('./src/components/nav-header/src/nav-header.vue')['default']
     NavMenu: typeof import('./src/components/nav-menu/src/nav-menu.vue')['default']
+    UserInfo: typeof import('./src/components/nav-header/src/user-info.vue')['default']
   }
 }
 

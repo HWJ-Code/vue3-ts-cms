@@ -81,9 +81,11 @@ export default defineComponent({
     const router = useRouter()
     const route = useRoute()
 
-    //当前路由对应的id
-    let currentMenu = getMenuByRoute(userMenus.value, route.path)
-    let currentMenuId = ref(currentMenu.id + '')
+    //当前路由对应的id（使用computed 例如直接在导航栏改变路径时 currentMenuId要相应改变）
+    const currentMenuId = computed(() => {
+      const currentMenu = getMenuByRoute(userMenus.value, route.path)
+      return currentMenu ? currentMenu.id + '' : ''
+    })
 
     //点击菜单显示对应路由
     const subItemClick = (subItem: any) => {
@@ -91,17 +93,6 @@ export default defineComponent({
         path: subItem.url ?? '/not-found'
       })
     }
-
-    //监听路由变化（例如直接在导航栏改变路径时 currentMenuId要相应改变）
-    watch(
-      () => route.path,
-      (newPath, oldPath) => {
-        currentMenu = getMenuByRoute(userMenus.value, newPath)
-        if (currentMenu) {
-          currentMenuId.value = currentMenu.id + ''
-        }
-      }
-    )
 
     return { userMenus, splitIcon, currentMenuId, subItemClick }
   }
