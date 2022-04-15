@@ -8,7 +8,9 @@ import {
   Goods,
   ChatLineRound,
   Fold,
-  Expand
+  Expand,
+  Search,
+  RefreshLeft
 } from '@element-plus/icons-vue'
 
 const components = [
@@ -19,7 +21,9 @@ const components = [
   Goods,
   ChatLineRound,
   Fold,
-  Expand
+  Expand,
+  Search,
+  RefreshLeft
 ]
 
 //自动全局注册icon

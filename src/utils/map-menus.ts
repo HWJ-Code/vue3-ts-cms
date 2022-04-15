@@ -1,4 +1,4 @@
-import { IBreadcrumbsType } from '@/base-ui/breadcrumb'
+import { IBreadcrumbs } from '@/base-ui/breadcrumb'
 import { RouteRecordRaw } from 'vue-router'
 
 //第一次进页面显示第一个菜单
@@ -59,7 +59,7 @@ export { firstMenu }
 
 //根据当前路由获取对应menu的信息 [{name: , path: }]（父级一起返回）
 export function pathMapBreadcrumbs(userMenus: any[], currentPath: string) {
-  const breadcrumbs: IBreadcrumbsType[] = []
+  const breadcrumbs: IBreadcrumbs[] = []
   getMenuByRoute(userMenus, currentPath, breadcrumbs)
   return breadcrumbs
 }
@@ -67,7 +67,7 @@ export function pathMapBreadcrumbs(userMenus: any[], currentPath: string) {
 export function getMenuByRoute(
   userMenus: any[],
   currentPath: string,
-  breadcrumbs?: IBreadcrumbsType[] //面包屑数据
+  breadcrumbs?: IBreadcrumbs[] //面包屑数据
 ): any {
   for (const menu of userMenus) {
     if (menu.type == 1) {

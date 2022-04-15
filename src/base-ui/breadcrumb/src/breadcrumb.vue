@@ -12,12 +12,12 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import { IBreadcrumbsType } from './types'
+import { IBreadcrumbs } from '../types'
 
 export default defineComponent({
   props: {
     breadcrumbs: {
-      type: Array as PropType<IBreadcrumbsType[]>,
+      type: Array as PropType<IBreadcrumbs[]>,
       default: () => []
     }
   },

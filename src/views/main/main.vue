@@ -61,7 +61,10 @@ export default defineComponent({
   .el-header {
     height: 50px;
     line-height: 50px;
-    border-bottom: 1px solid #b5b3b3;
+  }
+
+  .el-main {
+    background: #f3f3f3;
   }
 }
 </style>
